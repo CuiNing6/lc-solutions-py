@@ -1,1 +1,1 @@
-# lc-solutions-py
+This is my leetcode solution folder. Language:Python
