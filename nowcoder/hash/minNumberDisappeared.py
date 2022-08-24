@@ -33,6 +33,7 @@
 class Solution:
     def minNumberDisappeared(self , nums ):
         # write code here
+        nums = list(set(nums))
         nums.append(-1)
 
         i = 0
@@ -47,13 +48,14 @@ class Solution:
             else:
                 i = i + 1
 
+
         for j in range(1, len(nums)):
-            if nums[j] <= 0 or nums[j] > len(nums):
+            if nums[j] <= 0 or nums[j] >= len(nums):
                 return j
 
         return len(nums)
 
-nums = [4,5,6,8,9]
+nums = [2,1,3,7,6,9,5,11]
 run = Solution()
 res = run.minNumberDisappeared(nums)
 print(res)
