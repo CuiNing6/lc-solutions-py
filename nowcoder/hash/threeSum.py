@@ -31,4 +31,32 @@
 class Solution:
     def threeSum(self , num ):
         # write code here
-        pass
+        num = sorted(num)
+        res = []
+
+        for first in range(len(num)):
+            if first > 0 and num[first] == num[first-1]:
+                continue
+
+            third = len(num) - 1
+            target = -num[first]
+
+            for second in range(first+1, len(num)):
+                if second > first+1 and num[second] == num[second-1]:
+                    continue
+
+                while second < third and num[second] + num[third] > target:
+                    third -= 1
+
+                if second == third:
+                    break
+
+                if num[second] + num[third] == target:
+                    res.append([num[first], num[second], num[third]])
+
+        return res
+
+num = [-10,0,10,20,-10,-40]
+run = Solution()
+res = run.threeSum(num)
+print(res)
