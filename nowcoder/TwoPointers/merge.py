@@ -59,4 +59,25 @@ res = run.merge(A,m,B,n)
 print(res)
 
 
+class Solution:
+    def merge(self, A, m, B, n):
+        # write code here
+        if A == [] and B == []:
+            return []
+        elif A == []:
+            return B
+        elif B == []:
+            return A
 
+        while m > 0 and n > 0:
+            if A[m - 1] > B[n - 1]:
+                A[m + n - 1] = A[m - 1]
+                m = m - 1
+            else:
+                A[m + n - 1] = B[n - 1]
+                n = n - 1
+
+        if n > 0:
+            A[:n] = B[:n]
+
+        return A
