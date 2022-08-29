@@ -22,4 +22,21 @@
 class Solution:
     def solve(self , str ):
         # write code here
-        pass
+        if len(str) <= 1:
+            return str
+
+        n = len(str) - 1
+        res = ""
+        while n:
+            print(str[n])
+            res = res + str[n]
+            n -= 1
+
+        res = res + str[0]
+
+        return res
+
+str = "abcd"
+run =  Solution()
+res = run.solve(str)
+print(res)
