@@ -18,10 +18,10 @@
 返回值：[[0,20]]
 '''
 
-# class Interval:
-#     def __init__(self, a=0, b=0):
-#         self.start = a
-#         self.end = b
+class Interval:
+    def __init__(self, a=0, b=0):
+        self.start = a
+        self.end = b
 
 #
 #
@@ -34,21 +34,28 @@ class Solution:
         if len(intervals) <= 1:
             return intervals
 
-        intervals = sorted(intervals, key=lambda x: x[0])
+        intervals = sorted(intervals, key=lambda x: x.start)
 
-        j = 0
-        while j < len(intervals) - 1:
-            if intervals[j][1] >= intervals[j+1][0]:
-                intervals[j][1] = max(intervals[j][1], intervals[j+1][1])
-                intervals.remove([intervals[j+1][0],intervals[j+1][1]])
+        res = [intervals[0]]
+
+        for i in range(1,len(intervals)):
+            if res[-1].end >= intervals[i].start and res[-1].end <= intervals[i].end:
+                res[-1].end = intervals[i].end
+            elif res[-1].end >= intervals[i].end:
+                continue
             else:
-                j += 1
+                res.append(intervals[i])
+
+        return res
 
 
-        return intervals
 
+#[[2,3],[4,5],[6,7],[8,9],[1,10]]
+#[[1,4],[0,2],[3,5]]
 
-intervals = [[1,4],[0,2],[3,5]]
+# intervals = [Interval(2,3),Interval(4,5),Interval(6,7),Interval(8,9),Interval(1,10)]
+intervals = [Interval(1,4),Interval(0,2),Interval(3,5)]
 run = Solution()
 res = run.merge(intervals)
-print(res)
+for i in range(len(res)):
+    print(res[i].start, res[i].end)
