@@ -39,4 +39,32 @@
 class Solution:
     def maxLength(self , arr ):
         # write code here
-        pass
+        if len(arr) == 1:
+            return 1
+
+        if len(arr) == 0:
+            return 0
+
+        n = len(arr)
+        l = 0
+        r = 1
+
+        res = 0
+        tmp = 1
+
+        while r <= n - 1:
+            while r <= n - 1 and arr[l] < arr[r]:
+                tmp += 1
+                l += 1
+                r += 1
+            l += 1
+            r += 1
+            res = max(res, tmp)
+            tmp = 1
+
+        return res
+
+arr = [3,3,2,1,3,3,3,1]
+run = Solution()
+res = run.maxLength(arr)
+print(res)
