@@ -6,8 +6,8 @@
 数据范围：0≤∣S∣,∣T∣≤10000，保证s和t字符串中仅包含大小写英文字母
 要求: 时间复杂度 O(n)
 例如：
-S ="XDOYEZODEYXNZ"S="XDOYEZODEYXNZ"
-T ="XYZ"T="XYZ"
+S ="XDOYEZODEYXNZ"
+T ="XYZ"
 找出的最短子串为"YXNZ""YXNZ".
 
 注意：
@@ -31,4 +31,11 @@ T ="XYZ"T="XYZ"
 class Solution:
     def minWindow(self , S , T ):
         # write code here
-        pass
+        res = ""
+
+        n = len(T)
+        match = 0
+        for i in range(len(str)):
+            if str[i] == T[0]:
+                match += 1
+
