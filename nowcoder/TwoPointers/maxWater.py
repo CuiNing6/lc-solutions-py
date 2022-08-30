@@ -23,4 +23,36 @@
 class Solution:
     def maxWater(self , arr ):
         # write code here
-        pass
+        if len(arr) <= 2:
+            return 0
+
+        n = len(arr)
+        l = 1
+        r = n-2
+        lmax = arr[0]
+        rmax = arr[n-1]
+
+        res = 0
+
+        while l<=r:
+            if lmax < rmax:
+                if arr[l] < lmax:
+                    res += lmax - arr[l]
+                else:
+                    lmax = arr[l]
+                l += 1
+            else:
+                if arr[r] < rmax:
+                    res += rmax - arr[r]
+                else:
+                    rmax = arr[r]
+                r -= 1
+
+        return res
+
+
+arr = [4,5,1,3,2]
+run = Solution()
+res = run.maxWater(arr)
+print(res)
+
