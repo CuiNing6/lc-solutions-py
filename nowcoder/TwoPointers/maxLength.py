@@ -45,26 +45,19 @@ class Solution:
         if len(arr) == 0:
             return 0
 
-        n = len(arr)
-        l = 0
-        r = 1
-
         res = 0
-        tmp = 1
+        tmp = [arr[0]]
 
-        while r <= n - 1:
-            while r <= n - 1 and arr[l] < arr[r]:
-                tmp += 1
-                l += 1
-                r += 1
-            l += 1
-            r += 1
-            res = max(res, tmp)
-            tmp = 1
+        for i in range(1,len(arr)):
+            if arr[i] in tmp:
+                res = max(res, len(tmp))
+                start = tmp.index(arr[i])
+                tmp = tmp[start+1:]
+            tmp.append(arr[i])
 
-        return res
+        return max(res,len(tmp))
 
-arr = [3,3,2,1,3,3,3,1]
+arr = [2,2,3,4,3]
 run = Solution()
 res = run.maxLength(arr)
 print(res)
