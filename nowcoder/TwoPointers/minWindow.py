@@ -31,11 +31,52 @@ T ="XYZ"
 class Solution:
     def minWindow(self , S , T ):
         # write code here
-        res = ""
+        cnt = len(S) + 1
 
-        n = len(T)
-        match = 0
-        for i in range(len(str)):
-            if str[i] == T[0]:
-                match += 1
+        hash = {}
 
+        for i in T:
+            if i not in hash:
+                hash[i] = -1
+            else:
+                hash[i] -= 1
+
+        slow = 0
+        fast = 0
+        left = -1
+        right = -1
+
+        while fast < len(S):
+            if S[fast] in hash:
+                hash[S[fast]] += 1
+
+            while(self.check(hash)):
+                if cnt > fast - slow + 1:
+                    cnt = fast - slow + 1
+                    left = slow
+                    right = fast
+
+                if S[slow] in hash:
+                    hash[S[slow]] -= 1
+
+                slow += 1
+
+            fast += 1
+
+        if left == -1:
+            return ""
+
+        return S[left:right+1]
+
+
+    def check(self, dict):
+        for key, value in dict.items():
+            if value < 0:
+                return False
+        return True
+
+S = "XDOYEZODEYXNZ"
+T = "XYZ"
+run = Solution()
+res = run.minWindow(S, T)
+print(res)
