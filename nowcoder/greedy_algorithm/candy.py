@@ -31,4 +31,26 @@
 class Solution:
     def candy(self , arr ):
         # write code here
-        pass
+        num = [1] * len(arr)
+
+        for i in range(1, len(arr)):
+            if arr[i] > arr[i-1]:
+                num[i] = num[i-1] + 1
+
+        res = num[len(arr) - 1]
+        j = len(arr) - 2
+
+        while j >= 0:
+            if arr[j] > arr[j+1] and num[j] <= num[j+1]:
+                num[j] = num[j+1] + 1
+
+            res += num[j]
+
+            j -= 1
+
+        return res
+
+arr = [1,4,2,7,9]
+run = Solution()
+res = run.candy(arr)
+print(res)
