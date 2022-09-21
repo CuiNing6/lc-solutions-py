@@ -33,4 +33,29 @@ start_i,end_istart在int范围内
 class Solution:
     def minmumNumberOfHost(self , n , startEnd ):
         # write code here
-        pass
+        res = 0
+        start = []
+        end = []
+
+        for i in range(n):
+            start.append(startEnd[i][0])
+            end.append(startEnd[i][1])
+
+        start.sort()
+        end.sort()
+        j = 0
+
+        for k in range(n):
+            if start[k] >= end[j]:
+                j += 1
+            else:
+                res += 1
+
+        return res
+
+n = 2
+startEnd = [[1,2],[2,3]]
+
+run = Solution()
+res = run.minmumNumberOfHost(n, startEnd)
+print(res)
