@@ -28,4 +28,17 @@
 class Solution:
     def solve(self , n , m , a ):
         # write code here
-        pass
+        if m == n or m == 0:
+            return a
+
+        m = m % n
+
+        return a[n-m:] + a[:n-m]
+
+n = 6
+m = 2
+a = [1,2,3,4,5,6]
+
+run = Solution()
+res = run.solve(n, m, a)
+print(res)
