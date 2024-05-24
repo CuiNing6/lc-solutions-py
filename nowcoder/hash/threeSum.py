@@ -56,7 +56,125 @@ class Solution:
 
         return res
 
+# num = [-10,0,10,20,-10,-40]
+# run = Solution()
+# res = run.threeSum(num)
+# print(res)
+
+
+
+
+
+def threeSum_v1(num):
+    if num is None:
+        return []
+
+    res = []
+
+    for i in range(len(num)):
+        dict = {}
+        for j in range(i+1,len(num)):
+            target = 0-num[i]-num[j]
+
+            if target in dict:
+                tmp = [num[i],num[j],target]
+                tmp.sort()
+                if tmp not in res:
+                    res.append(tmp)
+            else:
+                dict[num[j]] = j
+
+    res.sort()
+
+    return res
+
+# num = [-10,0,10,20,-10,-40]
+# res = threeSum_v1(num)
+# print(res)
+
+
+
+def again_v0(num):
+    if not num:
+        return []
+
+    res = []
+
+    for i in range(len(num)):
+        dict = {}
+        for j in range(i+1,len(num)):
+            target = -num[i]-num[j]
+
+            if target in dict:
+                tmp = [num[i], num[j], target]
+                tmp.sort()
+                if tmp not in res:
+                    res.append(tmp)
+            else:
+                dict[num[j]] = j
+
+    res.sort()
+    return res
+
+# num = [-10,0,10,20,-10,-40]
+# res = again_v0(num)
+# print(res)
+
+
+def nSum(arr,n,start,target):
+    if not arr:
+        return []
+
+    res = []
+
+    if n == 2:
+        dict = {}
+        for i in range(start,len(arr)):
+            if target - arr[i] in dict:
+                tmp = [arr[i],target-arr[i]]
+                tmp.sort()
+                if tmp not in res:
+                    res.append(tmp)
+            else:
+                dict[arr[i]] = i
+        res.sort()
+    else:
+        for j in range(start,len(arr)):
+            res_pre = nSum(arr,n-1,j+1,target-arr[j])
+            if res_pre != []:
+                for k in res_pre:
+                    tmp = k
+                    tmp.append(arr[j])
+                    tmp.sort()
+                    if tmp not in res:
+                        res.append(tmp)
+        res.sort()
+    return res
+
 num = [-10,0,10,20,-10,-40]
-run = Solution()
-res = run.threeSum(num)
+numbers = [20,70,110,150]
+print("num:",num)
+print("numbers",numbers)
+
+res = nSum(num,4,0,20)
+# res = nSum(numbers,2,0,90)
 print(res)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
